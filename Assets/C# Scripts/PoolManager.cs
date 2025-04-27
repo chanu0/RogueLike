@@ -4,43 +4,47 @@ using UnityEngine;
 
 public class PoolManager : MonoBehaviour
 {
-    // .. 프리팹들을 보관할 변수
-    public GameObject[] prefabs;
-
-    // .. 풀 담당을 할 변수
-    List<GameObject>[] pools;
+    public GameObject[] Enemy_Frefabs; // 프리팹 배열
+    List<GameObject>[] pools; // 각각의 프리팹마다 풀
 
     void Awake()
     {
-        pools = new List<GameObject>[prefabs.Length];
-
-        for(int index = 0; index < pools.Length; index++)
+        if (Enemy_Frefabs == null || Enemy_Frefabs.Length == 0)
         {
-            pools[index] = new List<GameObject>();
+            Debug.LogError("PoolManager: Enemy_Frefabs가 비어있습니다!");
+            return;
+        }
+
+        pools = new List<GameObject>[Enemy_Frefabs.Length];
+        for (int i = 0; i < pools.Length; i++)
+        {
+            pools[i] = new List<GameObject>();
         }
     }
 
     public GameObject Get(int index)
     {
-        GameObject select = null;
-        // .. 선택한 풀의 놀고 있는(비활성화 된) 게 게임오브젝트 접근 
-        
-        foreach(GameObject item in pools[index]) 
+        if (index < 0 || index >= pools.Length)
         {
-            if (item.activeSelf)
+            Debug.LogError($"PoolManager: 인덱스 {index}가 잘못되었습니다!");
+            return null;
+        }
+
+        GameObject select = null;
+
+        foreach (GameObject item in pools[index])
+        {
+            if (!item.activeSelf)
             {
-                // .. 발견하면 select 변수에 할당
                 select = item;
                 select.SetActive(true);
                 break;
             }
         }
 
-        // ... 못 찾았으면?  
-        if(!select)
+        if (select == null)
         {
-            // ... 새롭게 생성하고 select 변수에 할당
-            select = Instantiate(prefabs[index], transform);
+            select = Instantiate(Enemy_Frefabs[index], transform);
             pools[index].Add(select);
         }
 

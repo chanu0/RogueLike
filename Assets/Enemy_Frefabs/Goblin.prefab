@@ -243,7 +243,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2814092211ce7414e917fe4c474d0ab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 2.5
+  Speed: 7
+  Health: 0
+  MaxHealth: 35
+  Animcom:
+  - {fileID: 22100000, guid: 050556270436d4f4288557291a1a99c0, type: 2}
   target: {fileID: 0}
 --- !u!114 &8588452442889553149
 MonoBehaviour:
