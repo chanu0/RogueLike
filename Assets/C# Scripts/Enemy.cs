@@ -55,16 +55,34 @@ public class Enemy : MonoBehaviour
 
     public void Init(SpawnData data)
     {
-        Debug.Log($"[Enemy Init] Init 시작: spriteType={data.spriteType}, speed={data.speed}, Health={data.Health}");
-
         anim.runtimeAnimatorController = Animcom[data.spriteType];
         Speed = data.speed;
         MaxHealth = data.Health;
         Health = data.Health;
 
         isLive = true;
-
-        Debug.Log($"[Enemy Init] Init 완료: isLive={isLive}");
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!collision.CompareTag("Bullet"))
+            return;
+
+        Health -= collision.GetComponent<Bullet>().Damage;
+
+        if(Health > 0)
+        {
+            //... Live, Hit action 
+        }
+        else
+        {
+            //... Dead
+            Dead();
+        }
+    }
+
+    void Dead()
+    {
+        gameObject.SetActive(false);
+    }
 }

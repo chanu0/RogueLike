@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoolManager : MonoBehaviour
+public class PoolManager : MonoBehaviour 
 {
     public GameObject[] Enemy_Frefabs; // 프리팹 배열
     List<GameObject>[] pools; // 각각의 프리팹마다 풀

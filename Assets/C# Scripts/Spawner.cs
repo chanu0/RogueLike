@@ -73,12 +73,20 @@ public class Spawner : MonoBehaviour
         Enemy enemy = obj.GetComponent<Enemy>();
         if (enemy != null)
         {
-            Debug.Log("[Spawner] Enemy 스크립트 찾음. Init 호출 시작");
-            // 스폰 데이터 설정
-            SpawnData spawnData = new SpawnData();
-            spawnData.spriteType = randomIndex;
+            // Animcom 유효성 검사
+            if (enemy.Animcom == null || enemy.Animcom.Length == 0)
+            {
+                Debug.LogError($"[Spawner] enemy.Animcom 배열이 비어 있음! Init 생략");
+                return;
+            }
 
-            switch (randomIndex)
+            // ⚠️ spriteType을 Animcom 범위 내에서 설정
+            int spriteType = Random.Range(0, enemy.Animcom.Length);
+
+            SpawnData spawnData = new SpawnData();
+            spawnData.spriteType = spriteType;
+            
+            switch (spriteType)
             {
                 case 0: // Zombie
                 case 1: // R.Zombie
@@ -97,10 +105,6 @@ public class Spawner : MonoBehaviour
                     spawnData.Health = 5f;
                     spawnData.speed = 3f;
                     break;
-                default:
-                    spawnData.Health = 20f;
-                    spawnData.speed = 3f;
-                    break;
             }
 
             enemy.Init(spawnData);
@@ -110,4 +114,5 @@ public class Spawner : MonoBehaviour
             Debug.LogWarning($"[Spawner] Enemy 스크립트를 못 찾음! randomIndex = {randomIndex}");
         }
     }
+
 }
