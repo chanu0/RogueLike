@@ -38,7 +38,7 @@ public class Weapon : MonoBehaviour
     {
         for(int index = 0; index < Count; index++)
         {
-            Transform Bullet = Gamemanager.instance.pool.Get(Prefabid).transform;
+            Transform Bullet = Gamemanager.instance.pool.GetOther(Prefabid).transform;
             Bullet.parent = transform;
             Bullet.GetComponent<Bullet>().Init(Damage, -1); // -1 is infinity per
         }

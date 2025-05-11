@@ -2,52 +2,73 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoolManager : MonoBehaviour 
+public class PoolManager : MonoBehaviour
 {
-    public GameObject[] Enemy_Frefabs; // 프리팹 배열
-    List<GameObject>[] pools; // 각각의 프리팹마다 풀
+    [Header("적 프리팹 배열")]
+    public GameObject[] Enemy_Frefabs;
+    private List<GameObject>[] enemyPools;
+
+    [Header("기타 프리팹 배열")]
+    public GameObject[] Other_Prefabs;
+    private List<GameObject>[] otherPools;
 
     void Awake()
     {
-        if (Enemy_Frefabs == null || Enemy_Frefabs.Length == 0)
+        // 적 풀 초기화
+        enemyPools = new List<GameObject>[Enemy_Frefabs.Length];
+        for (int i = 0; i < enemyPools.Length; i++)
         {
-            Debug.LogError("PoolManager: Enemy_Frefabs가 비어있습니다!");
-            return;
+            enemyPools[i] = new List<GameObject>();
         }
 
-        pools = new List<GameObject>[Enemy_Frefabs.Length];
-        for (int i = 0; i < pools.Length; i++)
+        // 기타 풀 초기화
+        otherPools = new List<GameObject>[Other_Prefabs.Length];
+        for (int i = 0; i < otherPools.Length; i++)
         {
-            pools[i] = new List<GameObject>();
+            otherPools[i] = new List<GameObject>();
         }
     }
 
+    /// <summary>
+    /// 적 프리팹 풀에서 가져오기 (Spawner에서 사용)
+    /// </summary>
     public GameObject Get(int index)
+    {
+        return GetFromPool(Enemy_Frefabs, enemyPools, index);
+    }
+
+    /// <summary>
+    /// 기타 프리팹 풀에서 가져오기 (아이템, 총알 등)
+    /// </summary>
+    public GameObject GetOther(int index)
+    {
+        return GetFromPool(Other_Prefabs, otherPools, index);
+    }
+
+    /// <summary>
+    /// 공통 풀 처리 로직
+    /// </summary>
+    private GameObject GetFromPool(GameObject[] prefabs, List<GameObject>[] pools, int index)
     {
         if (index < 0 || index >= pools.Length)
         {
-            Debug.LogError($"PoolManager: 인덱스 {index}가 잘못되었습니다!");
+            Debug.LogError($"PoolManager: 인덱스 {index}가 범위를 벗어났습니다!");
             return null;
         }
 
-        GameObject select = null;
-
-        foreach (GameObject item in pools[index])
+        // 비활성화된 오브젝트 재사용
+        foreach (GameObject obj in pools[index])
         {
-            if (!item.activeSelf)
+            if (!obj.activeSelf)
             {
-                select = item;
-                select.SetActive(true);
-                break;
+                obj.SetActive(true);
+                return obj;
             }
         }
 
-        if (select == null)
-        {
-            select = Instantiate(Enemy_Frefabs[index], transform);
-            pools[index].Add(select);
-        }
-
-        return select;
+        // 없으면 새로 생성
+        GameObject newObj = Instantiate(prefabs[index], transform);
+        pools[index].Add(newObj);
+        return newObj;
     }
 }
