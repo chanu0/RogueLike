@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,33 +7,33 @@ public class Enemy : MonoBehaviour
     public float Speed;
     public Rigidbody2D target;
 
-    bool isLive;
+    bool isLive = true;
 
-    Rigidbody2D rigid;
-    SpriteRenderer spriter;
+    Rigidbody2D Rigid;
+    SpriteRenderer Spriter;
 
     void Awake()
     {
-        rigid = GetComponent<Rigidbody2D>();
-        spriter = GetComponent<SpriteRenderer>();
+        Rigid = GetComponent<Rigidbody2D>();
+        Spriter = GetComponent<SpriteRenderer>();
     }
 
     void FixedUpdate()
     {
-        if(isLive)
+        if (!isLive)
             return;
 
-        Vector2 dirvec = target.position - rigid.position;
-        Vector2 nextVec = dirvec.normalized * Speed * Time.fixedDeltaTime;
-        rigid.MovePosition(rigid.position + nextVec);
-        rigid.velocity = Vector2.zero;
+        Vector2 dirVec = target.position - Rigid.position;
+        Vector2 nextVec = dirVec.normalized * Speed * Time.fixedDeltaTime;
+        Rigid.MovePosition(Rigid.position +  nextVec);
+        Rigid.velocity = Vector2.zero;
     }
 
     void LateUpdate()
     {
-        if (isLive)
+        if (!isLive)
             return;
 
-        spriter.flipX = target.position.x < rigid.position.x;
+        Spriter.flipX = target.position.x < Rigid.velocity.x;
     }
 }

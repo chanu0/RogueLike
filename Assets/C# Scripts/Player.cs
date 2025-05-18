@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -7,36 +8,37 @@ public class Player : MonoBehaviour
     public Vector2 inputVec;
     public float Speed;
 
-    Rigidbody2D rigid;
-    SpriteRenderer sprite;
-    Animator anim;
+    Rigidbody2D Rigid;
+    SpriteRenderer Spriter;
+    Animator Anim;
 
     void Awake()
     {
-        rigid = GetComponent<Rigidbody2D>();
-        sprite = GetComponent<SpriteRenderer>();
-        anim = GetComponent<Animator>();
+        Rigid = GetComponent<Rigidbody2D>();
+        Spriter = GetComponent<SpriteRenderer>();
+        Anim = GetComponent<Animator>();
     }
 
+    // Update is called once per frame
     void Update()
     {
-        inputVec.x = Input.GetAxis("Horizontal");
-        inputVec.y = Input.GetAxis("Vertical");
+        inputVec.x = Input.GetAxisRaw("Horizontal");
+        inputVec.y = Input.GetAxisRaw("Vertical");
     }
 
     void FixedUpdate()
     {
-        Vector2 nextvec = inputVec.normalized * Speed * Time.deltaTime;
-        rigid.MovePosition(rigid.position + nextvec);
+        Vector2 nextVec = inputVec.normalized * Speed * Time.deltaTime;
+        Rigid.MovePosition (Rigid.position + nextVec);
     }
 
     void LateUpdate()
     {
-        anim.SetFloat("Speed", inputVec.magnitude);
+        Anim.SetFloat("Speed", inputVec.magnitude);
 
-        if (inputVec.x != 0)
+        if(inputVec.x != 0)
         {
-            sprite.flipX = inputVec.x < 0; 
+            Spriter.flipX = inputVec.x < 0;
         }
     }
 }

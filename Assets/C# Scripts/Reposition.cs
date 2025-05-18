@@ -22,13 +22,13 @@ public class Reposition : MonoBehaviour
         float diffy = Mathf.Abs(playerPos.y - myPos.y);
 
         Vector3 playerDir = Gamemanager.instance.player.inputVec;
-        float dirX = playerDir.x < 0? - 1 : 1;
+        float dirX = playerDir.x < 0 ? -1 : 1;
         float dirY = playerDir.y < 0 ? -1 : 1;
 
         switch (transform.tag)
         {
             case "Ground":
-                if(diffx > diffy)
+                if (diffx > diffy)
                 {
                     transform.Translate(Vector3.right * dirX * 40);
                 }
