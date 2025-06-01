@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
 {
     public Vector2 inputVec;
     public float Speed;
-
+    public Scanner scanner;
     Rigidbody2D Rigid;
     SpriteRenderer Spriter;
     Animator Anim;
@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
         Rigid = GetComponent<Rigidbody2D>();
         Spriter = GetComponent<SpriteRenderer>();
         Anim = GetComponent<Animator>();
+        scanner = GetComponent<Scanner>();
     }
 
     // Update is called once per frame
