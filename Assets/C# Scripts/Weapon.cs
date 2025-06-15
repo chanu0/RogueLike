@@ -15,17 +15,15 @@ public class Weapon : MonoBehaviour
 
     void Awake()
     {
-        player = GetComponentInParent<Player>();
-    }
-
-    void Start()
-    {
-        Init();
+        player = Gamemanager.instance.player;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!Gamemanager.instance.isLive)
+            return;
+
         switch (id)
         {
             case 0:
@@ -56,10 +54,32 @@ public class Weapon : MonoBehaviour
 
         if (id == 0)
             Batch();
+
+        player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
     }
 
-    public void Init()
+    public void Init(ItemData data)
     {
+        // Basic Set
+        name = "Weapon " + data.Itemid;
+        transform.parent = player.transform;
+        transform.localPosition = Vector3.zero;
+
+        // Property Set
+        id = data.Itemid;
+        Damage = data.BaseDamage;
+        Count = data.BaseCount;
+
+        for(int index = 0; index < Gamemanager.instance.pool.prefabs.Length; index++)
+        {
+            if (data.projectile == Gamemanager.instance.pool.prefabs[index])
+            {
+                prefabId = index;
+                break;
+            }
+        }
+
+
         switch (id)
         {
             case 0:
@@ -70,7 +90,11 @@ public class Weapon : MonoBehaviour
                 Speed = 0.5f;
                 break;
         }
+
+        player.BroadcastMessage("ApplyGear");
     }
+
+    
 
     void Batch()
     {
@@ -84,7 +108,7 @@ public class Weapon : MonoBehaviour
             }
             else
             {
-                Bullet  = Gamemanager.instance.Pools.get(prefabId).transform;
+                Bullet  = Gamemanager.instance.pool.get(prefabId).transform;
                 Bullet.parent = transform;
             }
 
@@ -107,7 +131,7 @@ public class Weapon : MonoBehaviour
         Vector3 dir = targetPos - transform.position;
         dir = dir.normalized;
 
-        Transform Bullet = Gamemanager.instance.Pools.get(prefabId).transform;
+        Transform Bullet = Gamemanager.instance.pool.get(prefabId).transform;
         Bullet.position = transform.position;
         Bullet.rotation = Quaternion.FromToRotation(Vector3.up, dir);
         Bullet.GetComponent<Bullet>().Init(Damage, Count, dir);

@@ -15,15 +15,20 @@ MonoBehaviour:
   itemtype: 2
   Itemid: 2
   ItemName: "\uAD8C\uAC11"
-  ItemDesc: 
+  ItemDesc: "\uC5F0\uC0AC\uC18D\uB3C4 {0}% \uC99D\uAC00\n"
   Itemicon: {fileID: -201829820, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
   BaseDamage: 3
   BaseCount: 0
   Damages:
-  - 0.5
-  - 1
+  - 0.3
+  - 0.6
+  - 0.9
+  - 1.2
   - 1.5
-  - 2
+  - 1.8
+  - 2.1
+  - 2.4
+  - 2.7
   - 3
   Counts:
   - 1
@@ -31,4 +36,4 @@ MonoBehaviour:
   - 2
   - 3
   - 4
-  projectile: {fileID: 1887129365759705433, guid: 359d6607dcc64a64886abaff9c8a02a7, type: 3}
+  projectile: {fileID: 0}

@@ -23,18 +23,26 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!Gamemanager.instance.isLive)
+            return;
         inputVec.x = Input.GetAxisRaw("Horizontal");
         inputVec.y = Input.GetAxisRaw("Vertical");
     }
 
     void FixedUpdate()
     {
+        if (!Gamemanager.instance.isLive)
+            return;
+
         Vector2 nextVec = inputVec.normalized * Speed * Time.deltaTime;
         Rigid.MovePosition (Rigid.position + nextVec);
     }
 
     void LateUpdate()
     {
+        if (!Gamemanager.instance.isLive)
+            return;
+
         Anim.SetFloat("Speed", inputVec.magnitude);
 
         if(inputVec.x != 0)

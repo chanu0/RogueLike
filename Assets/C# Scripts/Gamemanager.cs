@@ -7,6 +7,7 @@ public class Gamemanager : MonoBehaviour
 {
     public static Gamemanager instance;
     [Header("# Game Control")]
+    public bool isLive;
     public float GameTime;
     public float MaxGameTime = 2 * 10f;
 
@@ -19,9 +20,9 @@ public class Gamemanager : MonoBehaviour
     public int[] nextExp = {3, 5, 10, 100, 150, 210, 280, 360, 450, 600};
 
     [Header("# Game Object")]
-    public PoolManager Pools;
+    public PoolManager pool;
     public Player player;
-
+    public LevelUp uiLevelUp;
     
 
 
@@ -33,10 +34,16 @@ public class Gamemanager : MonoBehaviour
     void Start()
     {
         Health = MaxHealth;
+
+        // 임시 코드
+        uiLevelUp.Select(0);
     }
 
     void Update()
     {
+        if (!isLive)
+            return;
+
         GameTime += Time.deltaTime;
 
         if (GameTime > MaxGameTime)
@@ -49,10 +56,23 @@ public class Gamemanager : MonoBehaviour
     {
         Exp++;
 
-        if(Exp == nextExp[Level])
+        if (Exp == nextExp[Mathf.Min(Level, nextExp.Length - 1)])
         {
             Level++;
             Exp = 0;
+            uiLevelUp.Show();
         }
     }
+
+    public void Stop()
+    {
+        isLive = false;
+        Time.timeScale = 0;
+    }
+    public void Resume()
+    {
+        isLive = true;
+        Time.timeScale = 1;
+    }
 }
+
