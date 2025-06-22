@@ -27,7 +27,8 @@ public class Spawner : MonoBehaviour
     }
     void Spawn()
     {
-        GameObject Enemy = Gamemanager.instance.pool.get(0);
+        int enemyIndex = Random.Range(0, SpwanData.Length);
+        GameObject Enemy = Gamemanager.instance.pool.get(enemyIndex);
         Enemy.transform.position = SpawnPoint[Random.Range(1, SpawnPoint.Length)].position;
         Enemy.GetComponent<Enemy>().Init(SpwanData[level]);
     }

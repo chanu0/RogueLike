@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Services.Analytics;
 using UnityEngine;
 
 public class LevelUp : MonoBehaviour
@@ -11,7 +10,7 @@ public class LevelUp : MonoBehaviour
     void Awake()
     {
         rect = GetComponent<RectTransform>();
-        items = GetComponentsInChildren<ItemUpgrade>();
+        items = GetComponentsInChildren<ItemUpgrade>(true);
     }
 
     void Start()
@@ -51,7 +50,7 @@ public class LevelUp : MonoBehaviour
             ran[0] = Random.Range(0, items.Length);
             ran[1] = Random.Range(0, items.Length);
             ran[2] = Random.Range(0, items.Length);
-
+            
             if (ran[0] != ran[1] && ran[1] != ran[2] && ran[0] != ran[2])
                 break;
         }

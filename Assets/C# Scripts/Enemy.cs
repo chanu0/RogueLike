@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public RuntimeAnimatorController[] Animcon; 
+    // public RuntimeAnimatorController[] Animcon; 
     public float Speed;
     public float Health;
     public float MaxHealth;
@@ -65,7 +65,7 @@ public class Enemy : MonoBehaviour
 
     public void Init(SpwanData data)
     {
-        Anim.runtimeAnimatorController = Animcon[data.SpriteType];
+        // Anim.runtimeAnimatorController = Animcon[data.SpriteType];
         Speed = data.Speed;
         Health = data.Health;
         MaxHealth = data.Health;

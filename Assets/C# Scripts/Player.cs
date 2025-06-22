@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.Animations;
 using UnityEditor.Rendering;
 using UnityEngine;
 
@@ -10,6 +12,7 @@ public class Player : MonoBehaviour
     public Scanner scanner;
     Rigidbody2D Rigid;
     SpriteRenderer Spriter;
+    [SerializeField] private List<RuntimeAnimatorController> animatorControllers;
     Animator Anim;
 
     void Awake()
@@ -18,6 +21,17 @@ public class Player : MonoBehaviour
         Spriter = GetComponent<SpriteRenderer>();
         Anim = GetComponent<Animator>();
         scanner = GetComponent<Scanner>();
+    }
+
+    public void SwitchController(int index)
+    {
+        Anim = GetComponent<Animator>();
+        Anim.runtimeAnimatorController = animatorControllers[index];
+    }
+
+    void OnEnable()
+    {
+        Speed *= Character.Speed;
     }
 
     // Update is called once per frame
@@ -48,6 +62,25 @@ public class Player : MonoBehaviour
         if(inputVec.x != 0)
         {
             Spriter.flipX = inputVec.x < 0;
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (!Gamemanager.instance.isLive)
+            return;
+
+        Gamemanager.instance.Health -= Time.deltaTime * 10;
+
+        if(Gamemanager.instance.Health < 0)
+        {
+            for(int index = 2; index < transform.childCount; index++)
+            {
+                transform.GetChild(index).gameObject.SetActive(false);
+            }
+
+            Anim.SetTrigger("Dead");
+            Gamemanager.instance.GameOver();
         }
     }
 }

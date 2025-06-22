@@ -1,17 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.EditorTools;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Gamemanager : MonoBehaviour
 {
     public static Gamemanager instance;
+    SpriteRenderer spriter;
     [Header("# Game Control")]
     public bool isLive;
     public float GameTime;
     public float MaxGameTime = 2 * 10f;
 
     [Header("# Player Info")]
+    public int Playerid;
     public float Health;
     public float MaxHealth = 100;
     public int Level;
@@ -23,20 +27,64 @@ public class Gamemanager : MonoBehaviour
     public PoolManager pool;
     public Player player;
     public LevelUp uiLevelUp;
-    
+    public Result uiResult;
+    public GameObject EmenyCleaner;
 
 
     void Awake()
     {
+        spriter = GetComponent<SpriteRenderer>();
         instance = this;
     }
 
-    void Start()
+    public void GameStart(int id)
     {
+        Playerid = id;
         Health = MaxHealth;
 
+        player.SwitchController(Playerid % 2);
+        player.gameObject.SetActive(true);
         // 임시 코드
-        uiLevelUp.Select(0);
+        uiLevelUp.Select(Playerid % 2);
+        Resume();
+    }
+
+    public void GameOver()
+    {
+        StartCoroutine(GameOverRoutine());
+    }
+
+    IEnumerator GameOverRoutine()
+    {
+        isLive = false;
+
+        yield return new WaitForSeconds(0.5f);
+
+        uiResult.gameObject.SetActive(true);
+        uiResult.Lose();
+        Stop();
+    }
+
+    public void GameVictory()
+    {
+        StartCoroutine(GameVictoryRoutine());
+    }
+
+    IEnumerator GameVictoryRoutine()
+    {
+        isLive = false;
+        EmenyCleaner.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+
+        uiResult.gameObject.SetActive(true);
+        uiResult.Win();
+        Stop();
+    }
+
+    public void GameRetry()
+    {
+        SceneManager.LoadScene("Main");
+
     }
 
     void Update()
@@ -49,6 +97,7 @@ public class Gamemanager : MonoBehaviour
         if (GameTime > MaxGameTime)
         {
             GameTime = MaxGameTime;
+            GameVictory();
         }
     }
 
@@ -74,5 +123,7 @@ public class Gamemanager : MonoBehaviour
         isLive = true;
         Time.timeScale = 1;
     }
+
+    
 }
 
