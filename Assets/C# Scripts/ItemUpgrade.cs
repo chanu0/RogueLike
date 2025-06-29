@@ -44,9 +44,6 @@ public class ItemUpgrade : MonoBehaviour
                 textDesc.text = string.Format(data.ItemDesc);
                 break;
         }
-
-
-        
     }
 
     public void OnClick()
@@ -71,7 +68,6 @@ public class ItemUpgrade : MonoBehaviour
 
                     weapon.LevelUp(nextDamage, nextCount);
             }
-
                     level++;
                     break;
             case ItemData.Itemtype.Glove:    

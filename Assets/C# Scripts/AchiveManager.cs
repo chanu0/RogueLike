@@ -7,13 +7,16 @@ public class AchiveManager : MonoBehaviour
 {
     public GameObject[] lockCharacter;
     public GameObject[] unlockCharacter;
+    public GameObject uiNotice;
 
     enum Achive { UnlockPotato, UnlockApple }
     Achive[] achives;
+    WaitForSecondsRealtime wait;
 
     void Awake()
     {
         achives = (Achive[])Enum.GetValues(typeof(Achive));
+        wait = new WaitForSecondsRealtime(5);
 
         if (!PlayerPrefs.HasKey("MyData"))
         {
@@ -72,6 +75,24 @@ public class AchiveManager : MonoBehaviour
         if(isAchive && PlayerPrefs.GetInt(achive.ToString()) == 0)
         {
             PlayerPrefs.SetInt(achive.ToString(), 1);
+
+            for(int index = 0; index < uiNotice.transform.childCount; index++)
+            {
+                bool isActive = index == (int)achive;
+                uiNotice.transform.GetChild(index).gameObject.SetActive(isActive);
+            }
+
+            StartCoroutine(NoticeRoutine());
         }
+    }
+
+    IEnumerator NoticeRoutine()
+    {
+        uiNotice.SetActive(true);
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.LevelUp);
+
+        yield return wait;
+
+        uiNotice.SetActive(false);
     }
 }

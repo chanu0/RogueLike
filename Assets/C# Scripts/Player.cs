@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Animations;
-using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
@@ -33,14 +31,12 @@ public class Player : MonoBehaviour
     {
         Speed *= Character.Speed;
     }
-
-    // Update is called once per frame
     void Update()
     {
         if (!Gamemanager.instance.isLive)
             return;
-        inputVec.x = Input.GetAxisRaw("Horizontal");
-        inputVec.y = Input.GetAxisRaw("Vertical");
+        // inputVec.x = Input.GetAxisRaw("Horizontal");
+        // inputVec.y = Input.GetAxisRaw("Vertical");
     }
 
     void FixedUpdate()
@@ -48,8 +44,13 @@ public class Player : MonoBehaviour
         if (!Gamemanager.instance.isLive)
             return;
 
-        Vector2 nextVec = inputVec.normalized * Speed * Time.deltaTime;
+        Vector2 nextVec = inputVec * Speed * Time.deltaTime;
         Rigid.MovePosition (Rigid.position + nextVec);
+    }
+
+    void OnMove(InputValue value)
+    {
+        inputVec = value.Get<Vector2>();
     }
 
     void LateUpdate()
