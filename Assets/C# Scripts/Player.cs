@@ -58,7 +58,7 @@ public class Player : MonoBehaviour
         if (!Gamemanager.instance.isLive)
             return;
 
-        Anim.SetFloat("Speed", inputVec.magnitude);
+        Anim.SetFloat("speed", inputVec.magnitude);
 
         if(inputVec.x != 0)
         {
