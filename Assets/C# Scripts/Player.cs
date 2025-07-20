@@ -60,9 +60,33 @@ public class Player : MonoBehaviour
 
         Anim.SetFloat("speed", inputVec.magnitude);
 
-        if(inputVec.x != 0)
+        if (inputVec.magnitude > 0.01f)
         {
-            Spriter.flipX = inputVec.x < 0;
+            SetOrientation(inputVec);
+        }
+
+        //if (inputVec.x != 0)
+        //{
+        //    Spriter.flipX = inputVec.x < 0;
+        //}
+    }
+
+    void SetOrientation(Vector2 direction)
+    {
+        // 4방향 기준 (N:0, S:1, E:2, W:3)
+        if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+        {
+            if (direction.x > 0)
+                Anim.SetInteger("orientation", 2); // 동
+            else
+                Anim.SetInteger("orientation", 3); // 서
+        }
+        else
+        {
+            if (direction.y > 0)
+                Anim.SetInteger("orientation", 0); // 북
+            else
+                Anim.SetInteger("orientation", 1); // 남
         }
     }
 
@@ -80,7 +104,7 @@ public class Player : MonoBehaviour
                 transform.GetChild(index).gameObject.SetActive(false);
             }
 
-            Anim.SetTrigger("Dead");
+            //Anim.SetTrigger("Dead");
             Gamemanager.instance.GameOver();
         }
     }

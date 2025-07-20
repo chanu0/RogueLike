@@ -9,7 +9,7 @@ public class AchiveManager : MonoBehaviour
     public GameObject[] unlockCharacter;
     public GameObject uiNotice;
 
-    enum Achive { UnlockPotato, UnlockApple }
+    enum Achive { UnlockSmith, UnlockPriest }
     Achive[] achives;
     WaitForSecondsRealtime wait;
 
@@ -64,10 +64,10 @@ public class AchiveManager : MonoBehaviour
 
         switch (achive)
         {
-            case Achive.UnlockPotato:
+            case Achive.UnlockSmith:
                 isAchive = Gamemanager.instance.Kill >= 50;
                 break;
-            case Achive.UnlockApple:
+            case Achive.UnlockPriest:
                 isAchive = Gamemanager.instance.GameTime == Gamemanager.instance.MaxGameTime;
                 break;
         }

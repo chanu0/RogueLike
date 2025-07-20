@@ -89,28 +89,28 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 8886072151452244327}
-    m_Position: {x: 290, y: 90, z: 0}
+    m_Position: {x: 160, y: -30, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3195501089262410515}
-    m_Position: {x: 670, y: 90, z: 0}
+    m_Position: {x: 570, y: -150, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6958135186607056618}
-    m_Position: {x: 270, y: 140, z: 0}
+    m_Position: {x: 140, y: 100, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6172436769128834601}
-    m_Position: {x: 690, y: 140, z: 0}
+    m_Position: {x: 740, y: -30, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8042921040347660213}
-    m_Position: {x: 290, y: 190, z: 0}
+    m_Position: {x: 130, y: 210, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5373465641725229822}
-    m_Position: {x: 670, y: 190, z: 0}
+    m_Position: {x: 750, y: 100, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3282538389144042023}
-    m_Position: {x: 640, y: 250, z: 0}
+    m_Position: {x: 710, y: 250, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3315642884247298087}
-    m_Position: {x: 350, y: 30, z: 0}
+    m_Position: {x: 280, y: -150, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: 4809530971522716571}
@@ -165,7 +165,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 6
     m_ConditionEvent: orientation
-    m_EventTreshold: 4
+    m_EventTreshold: 1
   - m_ConditionMode: 4
     m_ConditionEvent: speed
     m_EventTreshold: 0.01
@@ -193,7 +193,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 6
     m_ConditionEvent: orientation
-    m_EventTreshold: 6
+    m_EventTreshold: 2
   - m_ConditionMode: 4
     m_ConditionEvent: speed
     m_EventTreshold: 0.01
@@ -221,7 +221,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 6
     m_ConditionEvent: orientation
-    m_EventTreshold: 2
+    m_EventTreshold: 3
   - m_ConditionMode: 4
     m_ConditionEvent: speed
     m_EventTreshold: 0.01
@@ -281,13 +281,13 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: orientation
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -311,7 +311,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 6
     m_ConditionEvent: orientation
-    m_EventTreshold: 2
+    m_EventTreshold: 3
   - m_ConditionMode: 3
     m_ConditionEvent: speed
     m_EventTreshold: 0.01
@@ -365,12 +365,12 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
+  - m_ConditionMode: 6
+    m_ConditionEvent: orientation
+    m_EventTreshold: 2
   - m_ConditionMode: 3
     m_ConditionEvent: speed
     m_EventTreshold: 0.01
-  - m_ConditionMode: 6
-    m_ConditionEvent: orientation
-    m_EventTreshold: 6
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3282538389144042023}
   m_Solo: 0
@@ -447,7 +447,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 6
     m_ConditionEvent: orientation
-    m_EventTreshold: 4
+    m_EventTreshold: 1
   - m_ConditionMode: 3
     m_ConditionEvent: speed
     m_EventTreshold: 0.01
@@ -526,7 +526,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: IDLE_N
+  m_Name: Chara_IDLE_N
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
