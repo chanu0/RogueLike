@@ -93,7 +93,7 @@ public class Enemy : MonoBehaviour
             Gamemanager.instance.Kill++;
             Gamemanager.instance.GetExp();
 
-            if(Gamemanager.instance.isLive)
+            if (Gamemanager.instance.isLive)
                 AudioManager.instance.PlaySfx(AudioManager.Sfx.Dead);
         }
     }
