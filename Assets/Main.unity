@@ -5817,6 +5817,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 245277526}
+        m_TargetAssemblyTypeName: ItemUpgrade, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 892324234}
         m_TargetAssemblyTypeName: LevelUp, Assembly-CSharp
         m_MethodName: Hide
@@ -11275,6 +11287,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 554924903}
+        m_TargetAssemblyTypeName: ItemUpgrade, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 892324234}
         m_TargetAssemblyTypeName: LevelUp, Assembly-CSharp
         m_MethodName: Hide
@@ -16394,7 +16418,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isLive: 0
   GameTime: 0
-  MaxGameTime: 30
+  MaxGameTime: 120
   Playerid: 0
   Health: 0
   MaxHealth: 100
@@ -16989,6 +17013,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 947486624}
+        m_TargetAssemblyTypeName: ItemUpgrade, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 892324234}
         m_TargetAssemblyTypeName: LevelUp, Assembly-CSharp
         m_MethodName: Hide
@@ -17235,6 +17271,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 987043021}
+        m_TargetAssemblyTypeName: ItemUpgrade, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &987043023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17448,6 +17496,18 @@ MonoBehaviour:
       - m_Target: {fileID: 892324234}
         m_TargetAssemblyTypeName: LevelUp, Assembly-CSharp
         m_MethodName: Hide
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1055346874}
+        m_TargetAssemblyTypeName: ItemUpgrade, Assembly-CSharp
+        m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17984,7 +18044,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4.977778
+  orthographic size: 5.3333335
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -25584,11 +25644,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 69922302361193918, guid: 9a0d56cb16ea075468bda0fb4e5c73f9, type: 3}
       propertyPath: SpwanData.Array.data[0].SpawnTime
-      value: 0.1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 69922302361193918, guid: 9a0d56cb16ea075468bda0fb4e5c73f9, type: 3}
       propertyPath: SpwanData.Array.data[1].SpawnTime
-      value: 0.1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 69922302863082032, guid: 9a0d56cb16ea075468bda0fb4e5c73f9, type: 3}
       propertyPath: m_Controller

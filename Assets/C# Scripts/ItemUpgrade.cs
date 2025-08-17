@@ -51,15 +51,15 @@ public class ItemUpgrade : MonoBehaviour
         switch (data.itemtype)
         {
             case ItemData.Itemtype.Melee:
-            case ItemData.Itemtype.Range:
-            if(level == 0)
-            {
-                GameObject newWeapon = new GameObject();
-                weapon = newWeapon.AddComponent<Weapon>();
-                weapon.Init(data);
-            }
-            else
-            {
+                if (level == 0)
+                {
+                    GameObject newWeapon = new GameObject();
+                    weapon = newWeapon.AddComponent<Weapon>();
+                    newWeapon.transform.SetParent(Gamemanager.instance.player.transform);
+                    weapon.Init(data);
+                }
+                else
+                {
                     float nextDamage = data.BaseDamage;
                     int nextCount = 0;
 
@@ -67,9 +67,29 @@ public class ItemUpgrade : MonoBehaviour
                     nextCount += (int)data.Counts[level];
 
                     weapon.LevelUp(nextDamage, nextCount);
-            }
-                    level++;
-                    break;
+                }
+                level++;
+                break;
+            case ItemData.Itemtype.Range:
+                if (level == 0)
+                {
+                    GameObject newWeapon = new GameObject();
+                    weapon = newWeapon.AddComponent<Weapon>();
+                    newWeapon.transform.SetParent(Gamemanager.instance.player.transform);
+                    weapon.Init(data);
+                }
+                else
+                {
+                    float nextDamage = data.BaseDamage;
+                    int nextCount = 0;
+
+                    nextDamage += data.BaseDamage * data.Damages[level];
+                    nextCount += (int)data.Counts[level];
+
+                    weapon.LevelUp(nextDamage, nextCount);
+                }
+                level++;
+                break;
             case ItemData.Itemtype.Glove:    
             case ItemData.Itemtype.Shoe:
                 if(level == 0)

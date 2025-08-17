@@ -61,6 +61,7 @@ public class Enemy : MonoBehaviour
         Spriter.sortingOrder = 2;
         Anim.SetBool("Dead", false);
         Health = MaxHealth;
+        GetComponent<SpriteRenderer>().color = Color.white;
     }
 
     public void Init(SpwanData data)
@@ -81,6 +82,8 @@ public class Enemy : MonoBehaviour
 
         if (Health > 0)
         {
+            if (!isLive)
+                return;
             Anim.SetTrigger("Hit");
             AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
         }
